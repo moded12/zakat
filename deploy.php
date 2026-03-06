@@ -1,22 +1,20 @@
 <?php
 
-if (isset($_GET['force'])) {
-    $output = shell_exec("cd /var/www/vhosts/shneler.com/httpdocs/zakat && git fetch origin && git reset --hard origin/main 2>&1");
-    echo "<pre>$output</pre>";
-    exit;
-}
+$git = "/usr/bin/git"; // المسار الكامل لـ git
+$path = "/var/www/vhosts/shneler.com/httpdocs/zakat";
 
-$secret = "zakat_deploy_secret";
+echo "<pre>";
 
-$payload = file_get_contents("php://input");
-$signature = $_SERVER['HTTP_X_HUB_SIGNATURE'] ?? '';
+echo "Testing git...\n";
+echo shell_exec("$git --version 2>&1");
 
-$hash = 'sha1=' . hash_hmac('sha1', $payload, $secret);
+echo "\nTesting directory...\n";
+echo shell_exec("cd $path && pwd 2>&1");
 
-if (!hash_equals($hash, $signature)) {
-    exit("Invalid signature");
-}
+echo "\nTesting fetch...\n";
+echo shell_exec("cd $path && $git fetch origin 2>&1");
 
-$output = shell_exec("cd /var/www/vhosts/shneler.com/httpdocs/zakat && git fetch origin && git reset --hard origin/main 2>&1");
+echo "\nTesting reset...\n";
+echo shell_exec("cd $path && $git reset --hard origin/main 2>&1");
 
-echo "<pre>$output</pre>";c
+echo "</pre>";
