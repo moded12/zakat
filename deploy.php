@@ -2,16 +2,12 @@
 
 $secret = "123456";
 
-$headers = getallheaders();
-
-if (!isset($headers['X-Hub-Signature'])) {
-    die("No signature");
-}
-
 $payload = file_get_contents("php://input");
+$signature = $_SERVER['HTTP_X_HUB_SIGNATURE'] ?? '';
+
 $hash = 'sha1=' . hash_hmac('sha1', $payload, $secret);
 
-if ($hash !== $headers['X-Hub-Signature']) {
+if (!hash_equals($hash, $signature)) {
     die("Invalid signature");
 }
 
