@@ -206,7 +206,7 @@ $title = $isFamilies ? 'عرض الأسر الفقيرة' : 'عرض الأيتا
         <div class="flex items-center gap-2">
           <!-- IMPORTANT: reload without entity => defaults to families -->
           <a href="./" class="btnx">الافتراضي (الأسر)</a>
-          <a href="admin.php" class="btnxP">لوحة 999999999988إدارة</a>
+          <a href="admin.php" class="btnxP">لوحة 66666666666إدارة</a>
         </div>
       </div>
     </div>
