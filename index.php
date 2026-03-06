@@ -109,7 +109,7 @@ function qs(array $over = []): string {
 }
 
 $isFamilies = ($entity === 'families');
-$title = $isFamilies ? 'عرض الأسر الفقيرة' : 'عرض الأيتام';
+$title = $isFamilies ? 'عرض الأسر الفقيرة' : '00000عرض الأيتام';
 ?>
 <!doctype html>
 <html lang="ar" dir="rtl">
@@ -303,7 +303,7 @@ $title = $isFamilies ? 'عرض الأسر الفقيرة' : 'عرض الأيتا
 
         <?php if ($isFamilies): ?>
           <div>
-            <label class="text-sm font-bold">وصف الحال��</label>
+            <label class="text-sm font-bold">وصف الحال  </label>
             <select class="inpx mt-1" name="show_desc">
               <option value="1" <?= $showDesc?'selected':'' ?>>إظهار</option>
               <option value="0" <?= !$showDesc?'selected':'' ?>>إخفاء</option>
