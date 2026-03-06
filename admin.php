@@ -15,8 +15,8 @@ require_once __DIR__ . '/config.php';
  * - Print buttons always print ONLY the active entity (families/orphans)
  *   by passing: print-distribution.php?entity=families|orphans
  */
-
-$ORG_NAME = 'لجنة زكاة مخيم حطين (نسخة 00000 اختبار)';
+c
+$ORG_NAME = 'لجنة زكاة مخيم حطين (نسخة 111111 اختبار)';
 
 $section = trim($_GET['section'] ?? 'dashboard');
 $allowed = ['dashboard', 'families', 'orphans', 'distribution', 'reports'];
