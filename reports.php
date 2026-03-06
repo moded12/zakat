@@ -174,8 +174,8 @@ include __DIR__ . '/partials/page-top.php';
   <div class="flex flex-wrap gap-2">
     <a class="btnxP" target="_blank" href="<?= e(print_url('families', ['page'=>1,'archived'=>'0'])) ?>">طباعة الأسر</a>
     <a class="btnxP" target="_blank" href="<?= e(print_url('orphans', ['page'=>1,'archived'=>'0'])) ?>">طباعة الأيتام</a>
-    <a class="btnx" target="_blank" href="print-distribution.php?entity=families&archived=1">طباعة الأسر المؤرشفة</a>
-    <a class="btnx" target="_blank" href="print-distribution.php?entity=orphans&archived=1">طباعة الأيتام المؤرشفين</a>
+    <a class="btnx" target="_blank" href="<?= e(print_url('families', ['page'=>1,'archived'=>'1'])) ?>">طباعة الأسر المؤرشفة</a>
+    <a class="btnx" target="_blank" href="<?= e(print_url('orphans', ['page'=>1,'archived'=>'1'])) ?>">طباعة الأيتام المؤرشفين</a>
   </div>
 </div>
 
