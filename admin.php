@@ -16,7 +16,7 @@ require_once __DIR__ . '/config.php';
  *   by passing: print-distribution.php?entity=families|orphans
  */
 c
-$ORG_NAME = '33333 زكاة مخيم حطين (نسخة جديدة)';
+$ORG_NAME = "اختبار deploy";
 
 $section = trim($_GET['section'] ?? 'dashboard');
 $allowed = ['dashboard', 'families', 'orphans', 'distribution', 'reports'];
