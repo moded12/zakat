@@ -1,20 +1,38 @@
 <?php
 
-$git = "/usr/bin/git"; // المسار الكامل لـ git
-$path = "/var/www/vhosts/shneler.com/httpdocs/zakat";
+$secret = "zakat_deploy_secret";
+$repo = "/var/www/vhosts/shneler.com/httpdocs/zakat";
+$logfile = $repo . "/deploy.log";
 
-echo "<pre>";
+/* قراءة البيانات القادمة من GitHub */
+$payload = file_get_contents("php://input");
+$signature = $_SERVER['HTTP_X_HUB_SIGNATURE'] ?? '';
 
-echo "Testing git...\n";
-echo shell_exec("$git --version 2>&1");
+/* إنشاء التوقيع المتوقع */
+$hash = 'sha1=' . hash_hmac('sha1', $payload, $secret);
 
-echo "\nTesting directory...\n";
-echo shell_exec("cd $path && pwd 2>&1");
+/* التحقق من صحة الطلب */
+if (!hash_equals($hash, $signature)) {
+    file_put_contents($logfile, date("Y-m-d H:i:s")." Invalid signature\n", FILE_APPEND);
+    die("Invalid signature");
+}
 
-echo "\nTesting fetch...\n";
-echo shell_exec("cd $path && $git fetch origin 2>&1");
+/* أوامر التحديث */
+$commands = [
+    "cd $repo",
+    "git fetch origin",
+    "git reset --hard origin/main",
+    "git clean -f"
+];
 
-echo "\nTesting reset...\n";
-echo shell_exec("cd $path && $git reset --hard origin/main 2>&1");
+$output = "";
 
-echo "</pre>";
+foreach ($commands as $cmd) {
+    $result = shell_exec($cmd . " 2>&1");
+    $output .= "$cmd\n$result\n";
+}
+
+/* حفظ log */
+file_put_contents($logfile, date("Y-m-d H:i:s")."\n".$output."\n", FILE_APPEND);
+
+echo "<pre>$output</pre>";
